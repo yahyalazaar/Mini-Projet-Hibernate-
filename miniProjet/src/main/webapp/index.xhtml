@@ -2,20 +2,42 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
-<h:head>	
-	<title>Register Employee</title>
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+	<title>Contacts</title>
 </h:head>
+
 <h:form>
-	<p:growl id="messages"></p:growl>
-	<p:panelGrid columns="2">
-		<p:outputLabel value="Enter Employee Name:"></p:outputLabel>
-		<p:inputText value="#{registerEmployee.employee.employeeName}"></p:inputText>
-		<p:outputLabel value="Enter Employee Hire Date:"></p:outputLabel>
-		<p:calendar value="#{registerEmployee.employee.employeeHireDate}"></p:calendar>
-		<p:outputLabel value="Enter Employee Salary:"></p:outputLabel>
-		<p:inputText value="#{registerEmployee.employee.employeeSalary}"></p:inputText>						
-	</p:panelGrid>
-	<p:commandButton value="Register" action="#{registerEmployee.register}" update="messages"></p:commandButton>
+	<p:commandButton value="logout" action="#{registerUser.signOut}"></p:commandButton>
+	<p:dataTable var="contact" value="#{contactBean.contacts}" rows="10"
+		paginator="true"
+		paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+		rowsPerPageTemplate="5,10,15">
+		<p:column headerText="Id">
+			<h:outputText value="#{contact.idContact}" />
+		</p:column>
+
+		<p:column headerText="Nom">
+			<h:outputText value="#{contact.nomContact}" />
+		</p:column>
+
+		<p:column headerText="Prenom">
+			<h:outputText value="#{contact.prenomContact}" />
+		</p:column>
+
+		<p:column headerText="Tel">
+			<h:outputText value="#{contact.telContact}" />
+		</p:column>
+
+		<f:facet name="paginatorTopLeft">
+			<p:commandButton type="button" icon="pi pi-refresh" />
+		</f:facet>
+
+		<f:facet name="paginatorBottomRight">
+			<p:commandButton type="button" icon="pi pi-cloud-upload" />
+		</f:facet>
+
+	</p:dataTable>
 </h:form>
 </html>
