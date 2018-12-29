@@ -86,5 +86,6 @@ public class Contact implements java.io.Serializable {
 	public void setTelContact(String telContact) {
 		this.telContact = telContact;
 	}
+	
 
 }

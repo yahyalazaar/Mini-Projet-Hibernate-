@@ -7,19 +7,58 @@
 <h:head>
 	<title>Contacts</title>
 </h:head>
-
 <h:form>
+	<p:growl id="messages"></p:growl>
+	<p:panelGrid columns="2">
+		<p:outputLabel value="Enter Contact First Name:"></p:outputLabel>
+		<p:inputText value="#{registerContact.contact.nomContact}"></p:inputText>
+		<p:outputLabel value="Enter Contact Last Name"></p:outputLabel>
+		<p:inputText value="#{registerContact.contact.prenomContact}"></p:inputText>
+		<p:outputLabel value="Enter Contact phone"></p:outputLabel>
+		<p:inputText value="#{registerContact.contact.telContact}"></p:inputText>
+	</p:panelGrid>
+	<p:commandButton value="Register" action="#{registerContact.register}"
+		update="messages"></p:commandButton>
 	<p:commandButton value="logout" action="#{registerUser.signOut}"></p:commandButton>
-	<p:dataTable widgetVar="contactsTable" var="contact" value="#{contactBean.contacts}" rows="10"
-		paginator="true"
+</h:form>
+<h:form>
+	<p:commandButton value="Refresh" action="#{registerContact.refresh}"></p:commandButton>
+	<p:dataTable id="contacts" widgetVar="contactsTable" var="contact"
+		value="#{contactBean.contacts}" rows="10" paginator="true"
 		paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 		rowsPerPageTemplate="5,10,15">
 		<f:facet name="header">
-            <p:outputPanel>
-                <h:outputText value="Search all fields:" />
-                <p:inputText id="globalFilter" onkeyup="PF('contactsTable').filter()" style="width:150px" placeholder="Enter keyword"/>
-            </p:outputPanel>
-        </f:facet>
+			<p:commandButton id="toggler" type="button" value="Columns"
+				style="float:left;" icon="pi pi-align-justify" />
+			<p:columnToggler datasource="contacts" trigger="toggler" />
+			<!--             <p:outputPanel style="float:right"> -->
+			<!--                 <h:outputText value="Search all fields:"/> -->
+			<!--                 <p:inputText id="globalFilter"  onkeyup="PF('contactsTable').filter()" style="width:150px" placeholder="Enter keyword"/> -->
+			<!--             </p:outputPanel> -->
+
+			<div style="float: right; padding-top: 5px;">
+				<h:commandLink>
+					<p:outputLabel style="cursor:pointer;font-size:12px">EXCEL</p:outputLabel>
+					<p:dataExporter type="xls" target="contacts" fileName="contacts" />
+				</h:commandLink>
+
+				<h:commandLink>
+					<p:outputLabel style="cursor:pointer;font-size:12px">  PDF</p:outputLabel>
+					<p:dataExporter type="pdf" target="contacts" fileName="contacts" />
+				</h:commandLink>
+
+				<h:commandLink>
+					<p:outputLabel style="cursor:pointer;font-size:12px">  CSV</p:outputLabel>
+					
+					<p:dataExporter type="csv" target="contacts" fileName="contacts" />
+				</h:commandLink>
+
+				<h:commandLink>
+					<p:outputLabel style="cursor:pointer;font-size:12px">  XML</p:outputLabel>
+					<p:dataExporter type="xml" target="contacts" fileName="contacts" />
+				</h:commandLink>
+			</div>
+		</f:facet>
 		<p:column headerText="Id" filterBy="#{contact.idContact}">
 			<h:outputText value="#{contact.idContact}" />
 		</p:column>
