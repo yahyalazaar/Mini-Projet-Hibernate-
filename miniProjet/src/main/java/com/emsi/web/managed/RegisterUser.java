@@ -49,6 +49,9 @@ public class RegisterUser {
 		}
 
 	}
+	public void signUp() throws IOException {
+		FacesContext.getCurrentInstance().getExternalContext().redirect("signUp.xhtml");
+	}
 
 	public void signOut() throws IOException {
 		user = new User();

@@ -15,5 +15,6 @@
 		<p:password value="#{registerUser.user.mdp}"></p:password> 			
 	</p:panelGrid>
 	<p:commandButton value="Register" action="#{registerUser.signIn}" update="messages"></p:commandButton>
+	<p:commandButton value="Sign Up" action="#{registerUser.signUp()}"></p:commandButton>
 </h:form>
 </html>

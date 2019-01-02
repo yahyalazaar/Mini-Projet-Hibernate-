@@ -35,6 +35,7 @@ public class RegisterContact {
 		dao.register(Contact);
 		FacesContext.getCurrentInstance().addMessage(null,
 				new FacesMessage("The Contact " + this.Contact.getNomContact() + " Is Registered Successfully"));
+		FacesContext.getCurrentInstance().getExternalContext().redirect("index.xhtml");
 
 	}
 	public void refresh() throws IOException {
